@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/team03-s24-4pm-7
 owner: ucsb-cs156-s24
 repo_name: team03-s24-4pm-7
-pull_requests: []
+pull_requests: [{"author":{"id":"MDQ6VXNlcjE3MDE2NTI4","is_bot":false,"login":"chendashi","name":"Zheli Chen"},"headRefName":"chloe-fixture","number":74,"title":"zc - add diningCommons fixtures","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/74"}]
