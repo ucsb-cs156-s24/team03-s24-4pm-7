@@ -12,19 +12,19 @@ const ucsbDiningCommonsMenuItemFixtures = {
     threeRestaurants:
         [
             {
-                "id": 2,
+                "id": 1,
                 "diningCommonsCode": "ortega",
                 "name": "Kung Pao Chickeno",
                 "station": "Entree Specials"
             },
             {
-                "id": 3,
+                "id": 2,
                 "diningCommonsCode": "ortega",
                 "name": "Classic Miso Soup",
                 "station": "Entree"
             },
             {
-                "id": 1,
+                "id": 3,
                 "diningCommonsCode": "ortega",
                 "name": "Rice Krispie Treat Bar",
                 "station": "Desearts"
