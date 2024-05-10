@@ -16,13 +16,13 @@ const Template = (args) => {
     )
 };
 
-/*
+
 export const Empty = Template.bind({});
 
 Empty.args = {
-    menuItems: []
+    menuItems: [],
 };
-*/
+
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
