@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
 describe("ArticlesForm tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["Title", "URL", "Explanation", "Email", "Date"];
+    const expectedHeaders = ["Title", "URL", "Explanation", "Email", "Date (iso format)"];
     const testId = "ArticlesForm";
 
     test("renders correctly with no initialContents", async () => {
@@ -88,7 +88,11 @@ describe("ArticlesForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/Title is required/);
-        expect(screen.getByText(/Description is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Title is required/)).toBeInTheDocument();
+        expect(screen.getByText(/URL is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Email is required/)).toBeInTheDocument();
+        expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
 
         const nameInput = screen.getByTestId(`${testId}-title`);
         fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });
@@ -96,6 +100,30 @@ describe("ArticlesForm tests", () => {
 
         await waitFor(() => {
             expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+        });
+
+        const urlInput = screen.getByTestId(`${testId}-url`);
+        fireEvent.change(urlInput, { target: { value: "a".repeat(31) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+        });
+
+        const explanationInput = screen.getByTestId(`${testId}-explanation`);
+        fireEvent.change(explanationInput, { target: { value: "a".repeat(101) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/Max length 100 characters/)).toBeInTheDocument();
+        });
+
+        const emailInput = screen.getByTestId(`${testId}-email`);
+        fireEvent.change(emailInput, { target: { value: "a".repeat(10) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/Email is required/)).toBeInTheDocument();
         });
 
     });

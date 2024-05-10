@@ -18,6 +18,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
     const navigate = useNavigate();
 
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+    const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const testIdPrefix = "ArticlesForm";
 
@@ -45,7 +46,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     data-testid={testIdPrefix + "-title"}
                     id="title"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
+                    isInvalid={Boolean(errors.title)}
                     {...register("title", {
                         required: "Title is required.",
                         maxLength : {
@@ -55,7 +56,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.name?.message}
+                    {errors.title?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -65,7 +66,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     data-testid={testIdPrefix + "-url"}
                     id="url"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
+                    isInvalid={Boolean(errors.url)}
                     {...register("url", {
                         required: "URL is required.",
                         maxLength : {
@@ -75,7 +76,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.name?.message}
+                    {errors.url?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -85,17 +86,17 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     data-testid={testIdPrefix + "-explanation"}
                     id="explanation"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
+                    isInvalid={Boolean(errors.explanation)}
                     {...register("explanation", {
                         required: "Explanation is required.",
                         maxLength : {
                             value: 100,
-                            message: "Max length 30 characters"
+                            message: "Max length 100 characters"
                         }
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.name?.message}
+                    {errors.explanation?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -105,17 +106,11 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     data-testid={testIdPrefix + "-email"}
                     id="email"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
-                    {...register("email", {
-                        required: "Email is required.",
-                        maxLength : {
-                            value: 30,
-                            message: "Max length 30 characters"
-                        }
-                    })}
+                    isInvalid={Boolean(errors.email)}
+                    {...register("email", { required: true, pattern: email_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.name?.message}
+                    {errors.email && 'Email is required. '}
                 </Form.Control.Feedback>
             </Form.Group>
 
