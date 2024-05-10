@@ -24,7 +24,7 @@ Empty.args = {
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-    organizations: ucsbOrganizationsFixtures.threeOrganizations,
+    organizations: ucsbOrganizationFixtures.threeOrganizations,
     currentUser: currentUserFixtures.userOnly,
 };
 
