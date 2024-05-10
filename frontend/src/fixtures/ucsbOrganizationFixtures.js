@@ -3,7 +3,7 @@ const ucsbOrganizationFixtures = {
         "orgCode": "1",
         "orgTranslationShort": "CSSA",
         "orgTranslation": "Chinese Students and Scholars Association",
-        "inactive": "true"
+        "inactive": "false"
     },
     threeOrganizations: [
         {
