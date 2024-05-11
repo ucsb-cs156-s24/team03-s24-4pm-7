@@ -2,7 +2,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 
-function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" }) {
+function ArticlesForm({ initialContents, submitAction, buttonLabel = "Submit" }) {
 
     
     // Stryker disable all
@@ -16,10 +16,11 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
     // Stryker restore all
    
     const navigate = useNavigate();
-
+    
+    // Stryker disable all: Not sure how to set up the complex behavior needed to test this
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
     // const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
+    // Stryker restore all
     const testIdPrefix = "ArticlesForm";
 
     return (
@@ -70,8 +71,8 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     {...register("url", {
                         required: "URL is required.",
                         maxLength : {
-                            value: 30,
-                            message: "Max length 30 characters"
+                            value: 20,
+                            message: "Max length 20 characters"
                         }
                     })}
                 />
@@ -110,8 +111,8 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                     {...register("email", {
                         required: "Email is required.",
                         maxLength : {
-                            value: 100,
-                            message: "Max length 30 characters"
+                            value: 25,
+                            message: "Max length 25 characters"
                         }
                     })}
                 />

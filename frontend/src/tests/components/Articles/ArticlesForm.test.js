@@ -30,7 +30,7 @@ describe("ArticlesForm tests", () => {
             </QueryClientProvider>
         );
 
-        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        expect(await screen.findByText(/Submit/)).toBeInTheDocument();
 
         expectedHeaders.forEach((headerText) => {
             const header = screen.getByText(headerText);
@@ -99,11 +99,11 @@ describe("ArticlesForm tests", () => {
         });
 
         const urlInput = screen.getByTestId(`${testId}-url`);
-        fireEvent.change(urlInput, { target: { value: "a".repeat(31) } });
+        fireEvent.change(urlInput, { target: { value: "a".repeat(21) } });
         fireEvent.click(submitButton);
 
         await waitFor(() => {
-            expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+            expect(screen.getByText(/Max length 20 characters/)).toBeInTheDocument();
         });
 
         const explanationInput = screen.getByTestId(`${testId}-explanation`);
@@ -113,6 +113,15 @@ describe("ArticlesForm tests", () => {
         await waitFor(() => {
             expect(screen.getByText(/Max length 100 characters/)).toBeInTheDocument();
         });
+
+        const emailInput = screen.getByTestId(`${testId}-email`);
+        fireEvent.change(emailInput, { target: { value: "a".repeat(26) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/Max length 25 characters/)).toBeInTheDocument();
+        });
+
     });
 
     test("Correct Error messsages on missing input", async () => {
