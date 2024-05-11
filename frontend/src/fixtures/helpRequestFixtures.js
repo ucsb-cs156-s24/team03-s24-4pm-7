@@ -6,7 +6,7 @@ const helpRequestFixtures = {
         "tableOrBreakoutRoom": "table",
         "requestTime": "2022-01-02T12:00:00",
         "explanation": "sample explanation for team01",
-        "solved": true
+        "solved": "true"
     },
     threeHelpRequests: [
         {
@@ -16,7 +16,7 @@ const helpRequestFixtures = {
             "tableOrBreakoutRoom": "table",
             "requestTime": "2022-01-02T12:00:00",
             "explanation": "sample explanation for team01",
-            "solved": true
+            "solved": "true"
         },
         {
             "id": 2,
@@ -25,16 +25,16 @@ const helpRequestFixtures = {
             "tableOrBreakoutRoom": "table",
             "requestTime": "2022-04-03T12:00:00",
             "explanation": "sample explanation for team02",
-            "solved": false
+            "solved": "false"
         },
         {
             "id": 3,
             "requesterEmail": "email3@hotmail.com",
             "teamId": "03",
-            "tableOrBreakoutRoom": "breakoutRoom",
+            "tableOrBreakoutRoom": "breakout",
             "requestTime": "2022-07-04T12:00:00",
-            "explanation": "sample explanation for breakoutRoom03",
-            "solved": false
+            "explanation": "sample explanation for breakout03",
+            "solved": "false"
         }
     ]
 };
