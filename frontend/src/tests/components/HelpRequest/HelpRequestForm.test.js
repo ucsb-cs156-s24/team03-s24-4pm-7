@@ -55,7 +55,7 @@ describe("HelpRequestForm tests", () => {
         });
 
         expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
-        expect(screen.queryByText(`Id`)).toBeInTheDocument();
+        expect(screen.getByText(`Id`)).toBeInTheDocument();
     });
 
 
@@ -91,11 +91,11 @@ describe("HelpRequestForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/requesterEmail is required./);
-        expect(screen.queryByText(/requesterEmail is required./)).toBeInTheDocument();
-        expect(screen.queryByText(/teamId is required./)).toBeInTheDocument();
-        expect(screen.queryByText(/tableOrBreakoutRoom is required./)).toBeInTheDocument();
-        expect(screen.queryByText(/requestTime is required./)).toBeInTheDocument();
-        expect(screen.queryByText(/explanation is required./)).toBeInTheDocument();
+        expect(screen.getByText(/requesterEmail is required./)).toBeInTheDocument();
+        expect(screen.getByText(/teamId is required./)).toBeInTheDocument();
+        expect(screen.getByText(/tableOrBreakoutRoom is required./)).toBeInTheDocument();
+        expect(screen.getByText(/requestTime is required./)).toBeInTheDocument();
+        expect(screen.getByText(/explanation is required./)).toBeInTheDocument();
     });
 
     test("No Error messages on good input", async () => {
@@ -145,8 +145,8 @@ describe("HelpRequestForm tests", () => {
         fireEvent.change(requesterEmail, { target: { value: 'invalid' } });
         fireEvent.click(submitButton);
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
-        expect(screen.queryByText(/tableOrBreakoutRoom must be either the word table or the word breakout./)).toBeInTheDocument();
-        expect(screen.queryByText(/emailRegex must be in the form <name@domain.toplevel>./)).toBeInTheDocument();
+        expect(screen.getByText(/tableOrBreakoutRoom must be either the word table or the word breakout./)).toBeInTheDocument();
+        expect(screen.getByText(/emailRegex must be in the form <name@domain.toplevel>./)).toBeInTheDocument();
     });
 
 
