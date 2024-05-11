@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
+import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
 
-describe("PlaceholderEditPage tests", () => {
+describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
@@ -30,7 +30,7 @@ describe("PlaceholderEditPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <PlaceholderEditPage />
+                    <UCSBDiningCommonsMenuItemEditPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
