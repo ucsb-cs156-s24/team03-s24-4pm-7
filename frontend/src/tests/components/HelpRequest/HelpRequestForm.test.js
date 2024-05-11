@@ -31,7 +31,7 @@ describe("HelpRequestForm tests", () => {
         expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
         expectedHeaders.forEach((headerText) => {
-            const header = screen.getByText(headerText);
+            const header = screen.queryByText(headerText);
             expect(header).toBeInTheDocument();
         });
 
@@ -50,12 +50,12 @@ describe("HelpRequestForm tests", () => {
         expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
         expectedHeaders.forEach((headerText) => {
-            const header = screen.getByText(headerText);
+            const header = screen.queryByText(headerText);
             expect(header).toBeInTheDocument();
         });
 
         expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
-        expect(screen.getByText(`Id`)).toBeInTheDocument();
+        expect(screen.queryByText(`Id`)).toBeInTheDocument();
     });
 
 
@@ -67,9 +67,9 @@ describe("HelpRequestForm tests", () => {
             </Router>
         );
         await screen.findByTestId(`${testId}-tableOrBreakoutRoom`);
-        const tableBreakout = screen.getByTestId(`${testId}-tableOrBreakoutRoom`);
-        const requestTime = screen.getByTestId(`${testId}-requestTime`);
-        const submitButton = screen.getByTestId(`${testId}-submit`);
+        const tableBreakout = screen.queryByTestId(`${testId}-tableOrBreakoutRoom`);
+        const requestTime = screen.queryByTestId(`${testId}-requestTime`);
+        const submitButton = screen.queryByTestId(`${testId}-submit`);
 
         fireEvent.change(tableBreakout, { target: { value: 'bad-input' } });
         fireEvent.change(requestTime, { target: { value: 'bad-input' } });
@@ -86,16 +86,16 @@ describe("HelpRequestForm tests", () => {
             </Router>
         );
         await screen.findByTestId(`${testId}-submit`);
-        const submitButton = screen.getByTestId(`${testId}-submit`);
+        const submitButton = screen.queryByTestId(`${testId}-submit`);
 
         fireEvent.click(submitButton);
 
         await screen.findByText(/requesterEmail is required./);
-        expect(screen.getByText(/requesterEmail is required./)).toBeInTheDocument();
-        expect(screen.getByText(/teamId is required./)).toBeInTheDocument();
-        expect(screen.getByText(/tableOrBreakoutRoom is required./)).toBeInTheDocument();
-        expect(screen.getByText(/requestTime is required./)).toBeInTheDocument();
-        expect(screen.getByText(/explanation is required./)).toBeInTheDocument();
+        expect(screen.queryByText(/requesterEmail is required./)).toBeInTheDocument();
+        expect(screen.queryByText(/teamId is required./)).toBeInTheDocument();
+        expect(screen.queryByText(/tableOrBreakoutRoom is required./)).toBeInTheDocument();
+        expect(screen.queryByText(/requestTime is required./)).toBeInTheDocument();
+        expect(screen.queryByText(/explanation is required./)).toBeInTheDocument();
     });
 
     test("No Error messages on good input", async () => {
@@ -110,13 +110,13 @@ describe("HelpRequestForm tests", () => {
         );
         await screen.findByTestId(`${testId}-submit`);
         
-        const requesterEmail = screen.getByTestId(`${testId}-requesterEmail`);
-        const teamId = screen.getByTestId(`${testId}-teamId`);
-        const tableOrBreakoutRoom = screen.getByTestId(`${testId}-tableOrBreakoutRoom`);
-        const requestTime = screen.getByTestId(`${testId}-requestTime`);
-        const explanation = screen.getByTestId(`${testId}-explanation`);
-        const solved = screen.getByTestId(`${testId}-solved`);
-        const submitButton = screen.getByTestId(`${testId}-submit`);
+        const requesterEmail = screen.queryByTestId(`${testId}-requesterEmail`);
+        const teamId = screen.queryByTestId(`${testId}-teamId`);
+        const tableOrBreakoutRoom = screen.queryByTestId(`${testId}-tableOrBreakoutRoom`);
+        const requestTime = screen.queryByTestId(`${testId}-requestTime`);
+        const explanation = screen.queryByTestId(`${testId}-explanation`);
+        const solved = screen.queryByTestId(`${testId}-solved`);
+        const submitButton = screen.queryByTestId(`${testId}-submit`);
 
         fireEvent.change(requesterEmail, { target: { value: 'test@gmail.com' } });
         fireEvent.change(teamId, { target: { value: 'id7' } });
@@ -158,7 +158,7 @@ describe("HelpRequestForm tests", () => {
             </Router>
         );
         await screen.findByTestId(`${testId}-cancel`);
-        const cancelButton = screen.getByTestId(`${testId}-cancel`);
+        const cancelButton = screen.queryByTestId(`${testId}-cancel`);
 
         fireEvent.click(cancelButton);
 
