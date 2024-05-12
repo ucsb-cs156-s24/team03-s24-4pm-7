@@ -64,7 +64,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                 when(ucsbOrganizationsRepository.findById(eq("munger-hall"))).thenReturn(Optional.empty());
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/ucsborganizations?code=munger-hall"))
+                MvcResult response = mockMvc.perform(get("/api/ucsborganizations?orgCode=munger-hall"))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
@@ -158,7 +158,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
 
         @Test
         public void logged_out_users_cannot_get_by_id() throws Exception {
-                mockMvc.perform(get("/api/ucsborganizations?code=1"))
+                mockMvc.perform(get("/api/ucsborganizations?orgCode=1"))
                                 .andExpect(status().is(403)); // logged out users can't get by id
         }
 
@@ -178,7 +178,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                 when(ucsbOrganizationsRepository.findById(eq("ORG"))).thenReturn(Optional.of(org));
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/ucsborganizations?code=ORG"))
+                MvcResult response = mockMvc.perform(get("/api/ucsborganizations?orgCode=ORG"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -207,7 +207,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/ucsborganizations?code=CSSA")
+                                delete("/api/ucsborganizations?orgCode=CSSA")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -229,7 +229,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/ucsborganizations?code=munger-hall")
+                                delete("/api/ucsborganizations?orgCode=munger-hall")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
@@ -266,7 +266,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/ucsborganizations?code=CSSA")
+                                put("/api/ucsborganizations?orgCode=CSSA")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
@@ -299,7 +299,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/ucsborganizations?code=CSSA")
+                                put("/api/ucsborganizations?orgCode=CSSA")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)

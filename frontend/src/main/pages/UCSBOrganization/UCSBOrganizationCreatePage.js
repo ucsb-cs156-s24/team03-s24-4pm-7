@@ -35,7 +35,7 @@ export default function UCSBOrganizationCreatePage({storybook=false}) {
   }
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/ucsborganization" />
+    return <Navigate to="/ucsborganizations" />
   }
 
   return (
