@@ -6,16 +6,6 @@ import { onDeleteSuccess } from "main/utils/UCSBDateUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-function cellToAxiosParamsDelete(cell) {
-    return {
-        url: "/api/helprequest",
-        method: "DELETE",
-        params: {
-            id: cell.row.values.id
-        }
-    }
-}
-
 export default function HelpRequestTable({ helpRequests, currentUser }) {
 
     const navigate = useNavigate();
@@ -25,9 +15,14 @@ export default function HelpRequestTable({ helpRequests, currentUser }) {
     }
 
     // Stryker disable all : hard to test for query caching
-
     const deleteMutation = useBackendMutation(
-        cellToAxiosParamsDelete,
+        (cell) => ({
+            url: "/api/helprequest",
+            method: "DELETE",
+            params: {
+                id: cell.row.values.id
+            }
+        }),
         { onSuccess: onDeleteSuccess },
         ["/api/helprequest/all"]
     );
