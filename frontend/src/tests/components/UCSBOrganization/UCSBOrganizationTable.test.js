@@ -114,8 +114,8 @@ describe("UserTable tests", () => {
         expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("2");
         expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("3");
 
-        expect(screen.getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("false");
-        expect(screen.getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("true");
+        expect(screen.getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("active");
+        expect(screen.getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("inactive");
 
         const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
         expect(editButton).toBeInTheDocument();
