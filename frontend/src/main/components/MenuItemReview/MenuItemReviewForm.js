@@ -21,8 +21,10 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-    // Stryker disable next-line Regex
+    // Stryker disable all
     const numRegex = /[0-9]+/i;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Stryker restore all
 
 
     return (
@@ -81,13 +83,13 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                                 required: true, maxLength : {
                                     value: 30,
                                     message: "Max length 30 characters"
-                                }
+                                }, pattern: emailRegex
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.reviewerEmail && 'reviewerEmail is required. '}
                             {errors.reviewerEmail?.message}
-                            {/* {errors.reviewerEmail?.type === 'pattern' && 'reviewerEmail must be a valid email address'} */}
+                            {errors.reviewerEmail?.type === 'pattern' && 'reviewerEmail must be a valid email address'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -103,13 +105,13 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.stars)}
                             {...register("stars", {
-                                required: true
+                                required: true, pattern: numRegex
                             })}
                             
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.stars && 'stars is required. '}
-                            {/* {errors.stars?.type === 'pattern' && 'stars must be a numerical value'} */}
+                            {errors.stars?.type === 'pattern' && 'stars must be a numerical value'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
