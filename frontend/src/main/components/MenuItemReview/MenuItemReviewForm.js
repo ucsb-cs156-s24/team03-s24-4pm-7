@@ -21,7 +21,8 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-
+    // Stryker disable next-line Regex
+    const numRegex = /[0-9]+/i;
 
 
     return (
@@ -56,12 +57,12 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.itemId)}
                             {...register("itemId", {
-                                required: "Item ID is required.",  
+                                required: true, pattern: numRegex  
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.itemId && 'itemId is required. '}
-                            {/* {errors.itemId?.type === 'pattern' && 'itemId must be a numerical value'} */}
+                            {errors.itemId?.type === 'pattern' && 'itemId must be a numerical value'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -77,7 +78,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.reviewerEmail)}
                             {...register("reviewerEmail", {
-                                required: "Reviewer Email is required.", maxLength : {
+                                required: true, maxLength : {
                                     value: 30,
                                     message: "Max length 30 characters"
                                 }
@@ -102,7 +103,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.stars)}
                             {...register("stars", {
-                                required: "Stars is required."
+                                required: true
                             })}
                             
                         />
@@ -142,7 +143,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.comments)}
                             {...register("comments", {
-                                required: "Comments is required.", maxLength : {
+                                required: true, maxLength : {
                                     value: 50,
                                     message: "Max length 50 characters"
                                 }
