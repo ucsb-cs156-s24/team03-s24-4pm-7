@@ -24,13 +24,13 @@ Empty.args = {
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-    menuItemReviews: menuItemReviewFixtures.threeMenuItemReview,
+    menuItemReviews: menuItemReviewFixtures.threeMenuItemReviews,
     currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-    menuItemReviews: menuItemReviewFixtures.threeMenuItemReview,
+    menuItemReviews: menuItemReviewFixtures.threeMenuItemReviews,
     currentUser: currentUserFixtures.adminUser,
 }
 
