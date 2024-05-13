@@ -129,6 +129,7 @@ describe("MenuItemReviewEditPage tests", () => {
             expect(starsField).toHaveValue("5");
             expect(dateReviewedField).toHaveValue("2022-03-14T15:00");
             expect(commentsField).toHaveValue("Great food");
+            expect(submitButton).toBeInTheDocument();
         });
 
         test("Changes when you click Update", async () => {
