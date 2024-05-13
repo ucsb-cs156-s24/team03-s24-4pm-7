@@ -59,7 +59,7 @@ export default function HelpRequestTable({ helpRequests, currentUser }) {
         },
         {
             Header: 'solved',
-            accessor: 'solved',
+            accessor: (row, _rowIndex) => row.solved ? 'true' : 'false',
         }
     ];
 
