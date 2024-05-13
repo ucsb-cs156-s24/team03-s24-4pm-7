@@ -86,6 +86,7 @@ describe("HelpRequestTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-requestTime`)).toHaveTextContent("2022-01-02T12:00:00");
     expect(screen.getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("sample explanation for team01");
     expect(screen.getByTestId(`${testId}-cell-row-0-col-solved`)).toHaveTextContent("true");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("false");
   });
 
   test("Has the expected colum headers and content for admin user", () => {
