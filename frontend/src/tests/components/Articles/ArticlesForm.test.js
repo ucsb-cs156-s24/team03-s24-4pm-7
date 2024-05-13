@@ -30,7 +30,7 @@ describe("ArticlesForm tests", () => {
             </QueryClientProvider>
         );
 
-        expect(await screen.findByText(/Submit/)).toBeInTheDocument();
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
         expectedHeaders.forEach((headerText) => {
             const header = screen.getByText(headerText);
@@ -86,7 +86,7 @@ describe("ArticlesForm tests", () => {
         fireEvent.change(urlField, { target: { value: 'bad-input' } });
         fireEvent.change(explanationField, { target: { value: 'bad-input' } });
         fireEvent.change(emailField, { target: { value: 'bad-input' } });
-        fireEvent.change(localDateTimeField, { target: { value: 'bad-input' } });
+        fireEvent.change(localDateTimeField, { target: { value: '2022' } });
         fireEvent.click(submitButton);
 
         // await screen.findByText(/QuarterYYYYQ must be in the format YYYYQ/);
@@ -120,6 +120,14 @@ describe("ArticlesForm tests", () => {
 
         await waitFor(() => {
             expect(screen.getByText(/Max length 25 characters/)).toBeInTheDocument();
+        });
+
+        const dateInput = screen.getByTestId(`${testId}-localDateTime`);
+        fireEvent.change(dateInput, { target: { value: "2022-01-02T12".repeat(26) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
         });
 
     });
@@ -197,6 +205,30 @@ describe("ArticlesForm tests", () => {
         fireEvent.click(cancelButton);
 
         await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+
+    });
+
+    test("that the correct validations are performed", async () => {
+        render(
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <ArticlesForm />
+                </Router>
+            </QueryClientProvider>
+        );
+
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        const submitButton = screen.getByText(/Create/);
+        fireEvent.click(submitButton);
+        const mockSubmit = screen.getByTestId(`${testId}-submit`);
+        fireEvent.change(mockSubmit, { target: { value: "" } });
+
+        await screen.findByText(/Title is required/);
+        expect(screen.getByText(/Title is required/)).toBeInTheDocument();
+        expect(screen.getByText(/URL is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Email is required/)).toBeInTheDocument();
+        expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
 
     });
 

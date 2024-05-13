@@ -2,7 +2,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 
-function ArticlesForm({ initialContents, submitAction, buttonLabel = "Submit" }) {
+function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 
     
     // Stryker disable all
