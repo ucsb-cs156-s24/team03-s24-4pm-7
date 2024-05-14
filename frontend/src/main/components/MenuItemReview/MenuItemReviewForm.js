@@ -21,7 +21,10 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-
+    // Stryker disable all
+    const numRegex = /[0-9]+/i;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Stryker restore all
 
 
     return (
@@ -51,17 +54,17 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="itemId">itemId</Form.Label>
                         <Form.Control
-                            data-testid="MenuItemReview-itemId"
+                            data-testid="MenuItemReviewForm-itemId"
                             id="itemId"
                             type="text"
                             isInvalid={Boolean(errors.itemId)}
                             {...register("itemId", {
-                                required: "Item ID is required.",  
+                                required: true, pattern: numRegex  
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.itemId && 'itemId is required. '}
-                            {/* {errors.itemId?.type === 'pattern' && 'itemId must be a numerical value'} */}
+                            {errors.itemId?.type === 'pattern' && 'itemId must be a numerical value'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -77,16 +80,16 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.reviewerEmail)}
                             {...register("reviewerEmail", {
-                                required: "Reviewer Email is required.", maxLength : {
+                                required: true, maxLength : {
                                     value: 30,
                                     message: "Max length 30 characters"
-                                }
+                                }, pattern: emailRegex
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.reviewerEmail && 'reviewerEmail is required. '}
                             {errors.reviewerEmail?.message}
-                            {/* {errors.reviewerEmail?.type === 'pattern' && 'reviewerEmail must be a valid email address'} */}
+                            {errors.reviewerEmail?.type === 'pattern' && 'reviewerEmail must be a valid email address'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -102,13 +105,13 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.stars)}
                             {...register("stars", {
-                                required: "Stars is required."
+                                required: true, pattern: numRegex
                             })}
                             
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.stars && 'stars is required. '}
-                            {/* {errors.stars?.type === 'pattern' && 'stars must be a numerical value'} */}
+                            {errors.stars?.type === 'pattern' && 'stars must be a numerical value'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -142,7 +145,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             type="text"
                             isInvalid={Boolean(errors.comments)}
                             {...register("comments", {
-                                required: "Comments is required.", maxLength : {
+                                required: true, maxLength : {
                                     value: 50,
                                     message: "Max length 50 characters"
                                 }
