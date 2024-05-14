@@ -10,13 +10,13 @@ const ucsbOrganizationFixtures = {
             "orgCode": "2",
             "orgTranslationShort": "AS",
             "orgTranslation": "Associated Students",
-            "inactive": "false"
+            "inactive": false
         },
         {
             "orgCode": "3",
             "orgTranslationShort": "UCSB",
             "orgTranslation": "University of California, Santa Barbara",
-            "inactive": "true"
+            "inactive": true
         },
         {
             "orgCode": "4",
