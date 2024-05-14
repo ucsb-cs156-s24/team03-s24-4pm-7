@@ -265,25 +265,25 @@ public class ArticlesControllerTests extends ControllerTestCase {
         LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
         LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
-        Articles articleOrig = Articles.builder()
-                        .title("firstDayOfClasses")
-                        .url("url1")
-                        .explanation("explanation")
-                        .email("f@ucsb.edu")
+        Articles article1 = Articles.builder()
+                        .title("Google")
+                        .url("www.google.com")
+                        .explanation("google homepage")
+                        .email("g@gmail.com")
                         .localDateTime(ldt1)
                         .build();
 
-        Articles articleEdited = Articles.builder()
-                        .title("lastDayOfClasses")
-                        .url("url2")
-                        .explanation("explanation2")
-                        .email("l@ucsb.edu")
+        Articles article1Edited = Articles.builder()
+                        .title("Microsoft")
+                        .url("www.microsoft.com")
+                        .explanation("microsoft homepage")
+                        .email("m@gmail.com")
                         .localDateTime(ldt2)
                         .build();
 
-        String requestBody = mapper.writeValueAsString(articleEdited);
+        String requestBody = mapper.writeValueAsString(article1Edited);
 
-        when(articlesRepository.findById(eq(67L))).thenReturn(Optional.of(articleOrig));
+        when(articlesRepository.findById(eq(67L))).thenReturn(Optional.of(article1));
 
         // act
         MvcResult response = mockMvc.perform(
@@ -296,7 +296,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
         // assert
         verify(articlesRepository, times(1)).findById(67L);
-        verify(articlesRepository, times(1)).save(articleEdited); // should be saved with correct user
+        verify(articlesRepository, times(1)).save(article1Edited); // should be saved with correct user
         String responseString = response.getResponse().getContentAsString();
         assertEquals(requestBody, responseString);
     }
