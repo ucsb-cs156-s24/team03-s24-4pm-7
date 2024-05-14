@@ -2,7 +2,7 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import { onDeleteSuccess } from "main/utils/UCSBDateUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
@@ -15,9 +15,14 @@ export default function HelpRequestTable({ helpRequests, currentUser }) {
     }
 
     // Stryker disable all : hard to test for query caching
-
     const deleteMutation = useBackendMutation(
-        cellToAxiosParamsDelete,
+        (cell) => ({
+            url: "/api/helprequest",
+            method: "DELETE",
+            params: {
+                id: cell.row.values.id
+            }
+        }),
         { onSuccess: onDeleteSuccess },
         ["/api/helprequest/all"]
     );
@@ -54,7 +59,7 @@ export default function HelpRequestTable({ helpRequests, currentUser }) {
         },
         {
             Header: 'solved',
-            accessor: 'solved',
+            accessor: (row, _rowIndex) => row.solved ? 'true' : 'false',
         }
     ];
 
