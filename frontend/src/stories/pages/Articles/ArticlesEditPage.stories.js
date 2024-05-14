@@ -24,7 +24,7 @@ Default.parameters = {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
         rest.get('/api/articles', (_req, res, ctx) => {
-            return res(ctx.json(ArticlesFixtures.threeArticles[0]));
+            return res(ctx.json(articlesFixtures.threeArticles[0]));
         }),
         rest.put('/api/articles', async (req, res, ctx) => {
             var reqBody = await req.text();
