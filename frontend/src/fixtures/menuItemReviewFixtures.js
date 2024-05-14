@@ -2,7 +2,7 @@ const menuItemReviewFixtures = {
     oneMenuItemReview:
     [
         {
-            "id": 11,
+            "id": 1,
             "itemId": 10,
             "reviewerEmail": "sampleEmail@gmail.com",
             "stars": 5,
@@ -11,10 +11,10 @@ const menuItemReviewFixtures = {
           }
     ],
 
-    threeMenuItemReview:
+    threeMenuItemReviews:
     [
         {
-            "id": 12,
+            "id": 1,
             "itemId": 89,
             "reviewerEmail": "sampleEmail2@gmail.com",
             "stars": 3,
@@ -23,7 +23,7 @@ const menuItemReviewFixtures = {
         },
 
         {
-            "id": 13,
+            "id": 2,
             "itemId": 134,
             "reviewerEmail": "sampleEmail3@gmail.com",
             "stars": 0,
@@ -32,7 +32,7 @@ const menuItemReviewFixtures = {
         },
 
         {
-            "id": 14,
+            "id": 3,
             "itemId": 1,
             "reviewerEmail": "sampleEmail4@gmail.com",
             "stars": 4,
