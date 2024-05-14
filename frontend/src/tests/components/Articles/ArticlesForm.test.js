@@ -221,7 +221,6 @@ describe("ArticlesForm tests", () => {
         const submitButton = screen.getByText(/Create/);
         fireEvent.click(submitButton);
         const mockSubmit = screen.getByTestId(`${testId}-submit`);
-        expect(screen.findByTestId(`${testId}-submit`));
         fireEvent.click(mockSubmit);
 
         await screen.findByText(/Title is required/);
