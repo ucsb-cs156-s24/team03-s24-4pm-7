@@ -1,5 +1,5 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
+import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -28,7 +28,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-describe("MenuItemReviewCreatePage tests", () => {
+describe("UCSBDatesCreatePage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
@@ -44,7 +44,7 @@ describe("MenuItemReviewCreatePage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <MenuItemReviewCreatePage />
+                    <UCSBDatesCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -54,40 +54,34 @@ describe("MenuItemReviewCreatePage tests", () => {
 
         const queryClient = new QueryClient();
         const ucsbDate = {
-            id: 1,
-            itemId: 1,
-            reviewerEmail: "testemail@gmail.com",
-            stars: 5,
-            dateReviewed: "2022-02-02T00:00",
-            comments: "pretty good"
+            id: 17,
+            quarterYYYYQField: 20221,
+            name: "Groundhog Day",
+            localDateTime: "2022-02-02T00:00"
         };
 
-        axiosMock.onPost("/api/menuitemreview/post").reply( 202, ucsbDate );
+        axiosMock.onPost("/api/ucsbdates/post").reply( 202, ucsbDate );
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <MenuItemReviewCreatePage />
+                    <UCSBDatesCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
         await waitFor(() => {
-            expect(screen.getByTestId("MenuItemReviewForm-itemId")).toBeInTheDocument();
+            expect(screen.getByTestId("UCSBDateForm-quarterYYYYQ")).toBeInTheDocument();
         });
 
-        const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-        const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-email");
-        const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-        const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
-        const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
-        const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
+        const quarterYYYYQField = screen.getByTestId("UCSBDateForm-quarterYYYYQ");
+        const nameField = screen.getByTestId("UCSBDateForm-name");
+        const localDateTimeField = screen.getByTestId("UCSBDateForm-localDateTime");
+        const submitButton = screen.getByTestId("UCSBDateForm-submit");
 
-        fireEvent.change(itemIdField, { target: { value: 1 } });
-        fireEvent.change(reviewerEmailField, { target: { value: "testemail@gmail.com" } });
-        fireEvent.change(starsField, { target: { value: 5 } });
-        fireEvent.change(dateReviewedField, { target: { value: '2022-02-02T00:00' } });
-        fireEvent.change(commentsField, { target: { value: "pretty good" } });
+        fireEvent.change(quarterYYYYQField, { target: { value: '20221' } });
+        fireEvent.change(nameField, { target: { value: 'Groundhog Day' } });
+        fireEvent.change(localDateTimeField, { target: { value: '2022-02-02T00:00' } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -97,15 +91,13 @@ describe("MenuItemReviewCreatePage tests", () => {
 
         expect(axiosMock.history.post[0].params).toEqual(
             {
-            "itemId": "1",
-            "reviewerEmail": "testemail@gmail.com",
-            "stars": "5",
-            "dateReviewed": "2022-02-02T00:00",
-            "comments": "pretty good"
+            "localDateTime": "2022-02-02T00:00",
+            "name": "Groundhog Day",
+            "quarterYYYYQ": "20221"
         });
 
-        expect(mockToast).toBeCalledWith("New menuItemReview Created - id: 1 itemId: 1");
-        expect(mockNavigate).toBeCalledWith({ "to": "/menuitemreview" });
+        expect(mockToast).toBeCalledWith("New ucsbDate Created - id: 17 name: Groundhog Day");
+        expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdates" });
     });
 
 
