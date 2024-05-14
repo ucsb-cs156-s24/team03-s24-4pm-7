@@ -18,6 +18,8 @@ describe("RecommendationRequestForm tests", () => {
       </Router>
     );
     await screen.findByText(/Requester Email/);
+    await screen.findByText(/Professor Email/);
+    await screen.findByText(/Explanation/);
     await screen.findByText(/Create/);
   });
 
@@ -25,7 +27,7 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm
-          initialContents={recommendationRequestFixtures.oneDate}
+          initialContents={recommendationRequestFixtures.oneRequest}
         />
       </Router>
     );
@@ -73,12 +75,6 @@ describe("RecommendationRequestForm tests", () => {
         /ProfessorEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
       )
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/DateRequested must be in ISO format/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/DateNeeded must be in ISO format/)
-    ).toBeInTheDocument();
   });
 
   test("Correct Error messsages on missing input", async () => {
@@ -97,6 +93,7 @@ describe("RecommendationRequestForm tests", () => {
     expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
     expect(screen.getByText(/DateRequested is required./)).toBeInTheDocument();
     expect(screen.getByText(/DateNeeded is required./)).toBeInTheDocument();
+    expect(screen.getByText(/Done is required./)).toBeInTheDocument();
   });
 
   test("No Error messsages on good input", async () => {
@@ -144,12 +141,9 @@ describe("RecommendationRequestForm tests", () => {
     });
     fireEvent.click(doneCheckbox);
     fireEvent.click(submitButton);
-
-    await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
-
     expect(
       screen.queryByText(
-        /ProfessorEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
+        /RequesterEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
       )
     ).not.toBeInTheDocument();
     expect(

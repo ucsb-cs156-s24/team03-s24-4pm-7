@@ -20,9 +20,10 @@ function RecommendationRequestForm({
   // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
   // Note that even this complex regex may still need some tweaks
 
-  // Stryker disable next-line Regex
+  // Stryker disable Regex
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker restore Regex
 
   // Stryker disable next-line all
   const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
@@ -56,13 +57,10 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.requesterEmail)}
               {...register("requesterEmail", {
                 required: true,
-                pattern: email_regex,
               })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.requesterEmail && "RequesterEmail is required. "}
-              {errors.requesterEmail?.type === "pattern" &&
-                "RequesterEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -127,8 +125,6 @@ function RecommendationRequestForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.dateRequested && "DateRequested is required. "}
-              {errors.dateRequested?.type === "pattern" &&
-                "DateRequested must be in ISO format"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -150,8 +146,6 @@ function RecommendationRequestForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.dateNeeded && "DateNeeded is required. "}
-              {errors.dateNeeded?.type === "pattern" &&
-                "DateNeeded must be in ISO format"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -160,15 +154,17 @@ function RecommendationRequestForm({
       <Row>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Check // Use Form.Check for checkboxes
+            <Form.Label htmlFor="dateNeeded">Done (true or false)</Form.Label>
+            <Form.Control
               data-testid="RecommendationRequestForm-done"
-              type="checkbox"
-              label="Done"
               id="done"
-              {...register("done", {
-                required: false,
-              })} // Register the "done" field
+              type="boolean"
+              isInvalid={Boolean(errors.done)}
+              {...register("done", { required: true })}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.done && "Done is required. "}
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
