@@ -1,12 +1,12 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
 
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
+import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "jest-mock-console";
@@ -22,11 +22,11 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("UCSBDatesIndexPage tests", () => {
+describe("MenuItemReviewIndexPage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
-    const testId = "UCSBDatesTable";
+    const testId = "MenuItemReviewTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -46,38 +46,38 @@ describe("UCSBDatesIndexPage tests", () => {
         // arrange
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdates/all").reply(200, []);
+        axiosMock.onGet("/api/menuitemreview/all").reply(200, []);
 
         // act
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UCSBDatesIndexPage />
+                    <MenuItemReviewIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
         // assert
         await waitFor( ()=>{
-            expect(screen.getByText(/Create UCSBDate/)).toBeInTheDocument();
+            expect(screen.getByText(/Create MenuItemReview/)).toBeInTheDocument();
         });
-        const button = screen.getByText(/Create UCSBDate/);
-        expect(button).toHaveAttribute("href", "/ucsbdates/create");
+        const button = screen.getByText(/Create MenuItemReview/);
+        expect(button).toHaveAttribute("href", "/menuitemreview/create");
         expect(button).toHaveAttribute("style", "float: right;");
     });
 
-    test("renders three dates correctly for regular user", async () => {
+    test("renders three reviews correctly for regular user", async () => {
         
         // arrange
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdates/all").reply(200, ucsbDatesFixtures.threeDates);
+        axiosMock.onGet("/api/menuitemreview/all").reply(200, menuItemReviewFixtures.threeMenuItemReviews);
 
         // act
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UCSBDatesIndexPage />
+                    <MenuItemReviewIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -88,7 +88,7 @@ describe("UCSBDatesIndexPage tests", () => {
         expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
         // assert that the Create button is not present when user isn't an admin
-        expect(screen.queryByText(/Create UCSBDate/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Create MenuItemReview/)).not.toBeInTheDocument();
 
     });
 
@@ -97,14 +97,14 @@ describe("UCSBDatesIndexPage tests", () => {
         // arrange
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdates/all").timeout();
+        axiosMock.onGet("/api/menuitemreview/all").timeout();
         const restoreConsole = mockConsole();
 
         // act
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UCSBDatesIndexPage />
+                    <MenuItemReviewIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -113,7 +113,7 @@ describe("UCSBDatesIndexPage tests", () => {
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
 
         const errorMessage = console.error.mock.calls[0][0];
-        expect(errorMessage).toMatch("Error communicating with backend via GET on /api/ucsbdates/all");
+        expect(errorMessage).toMatch("Error communicating with backend via GET on /api/menuitemreview/all");
         restoreConsole();
 
         expect(screen.queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
@@ -123,14 +123,14 @@ describe("UCSBDatesIndexPage tests", () => {
         // arrange
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdates/all").reply(200, ucsbDatesFixtures.threeDates);
-        axiosMock.onDelete("/api/ucsbdates").reply(200, "UCSBDate with id 1 was deleted");
+        axiosMock.onGet("/api/menuitemreview/all").reply(200, menuItemReviewFixtures.threeMenuItemReviews);
+        axiosMock.onDelete("/api/menuitemreview").reply(200, "MenuItemReview with id 1 was deleted");
 
         // act
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UCSBDatesIndexPage />
+                    <MenuItemReviewIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -147,12 +147,8 @@ describe("UCSBDatesIndexPage tests", () => {
         fireEvent.click(deleteButton);
 
         // assert
-        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBDate with id 1 was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("MenuItemReview with id 1 was deleted") });
 
     });
 
 });
-
-
-
-

@@ -31,9 +31,9 @@ const helpRequestFixtures = {
             "id": 3,
             "requesterEmail": "email3@hotmail.com",
             "teamId": "03",
-            "tableOrBreakoutRoom": "breakoutRoom",
+            "tableOrBreakoutRoom": "breakout",
             "requestTime": "2022-07-04T12:00:00",
-            "explanation": "sample explanation for breakoutRoom03",
+            "explanation": "sample explanation for breakout03",
             "solved": false
         }
     ]
