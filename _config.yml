@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/team03-s24-4pm-7
 owner: ucsb-cs156-s24
 repo_name: team03-s24-4pm-7
-pull_requests: [{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-create","number":103,"title":"Created ArticlesReview Create Page","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/103"},{"author":{"id":"MDQ6VXNlcjMyMTUwMjk5","is_bot":false,"login":"james-y-f","name":"James Fu"},"headRefName":"james-RecReq-form","number":102,"title":"Added Rec Request form with tests","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/102"},{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-table","number":101,"title":"Creating articles table and stories","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/101"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-create","number":103,"title":"Created ArticlesReview Create Page","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/103"}]
