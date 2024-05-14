@@ -127,6 +127,8 @@ function RecommendationRequestForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.dateRequested && "DateRequested is required. "}
+              {errors.dateRequested?.type === "pattern" &&
+                "DateRequested must be in ISO format"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -148,6 +150,8 @@ function RecommendationRequestForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.dateNeeded && "DateNeeded is required. "}
+              {errors.dateNeeded?.type === "pattern" &&
+                "DateNeeded must be in ISO format"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -157,11 +161,12 @@ function RecommendationRequestForm({
         <Col>
           <Form.Group className="mb-3">
             <Form.Check // Use Form.Check for checkboxes
+              data-testid="RecommendationRequestForm-done"
               type="checkbox"
               label="Done"
               id="done"
               {...register("done", {
-                required: true,
+                required: false,
               })} // Register the "done" field
             />
           </Form.Group>
