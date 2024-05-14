@@ -45,7 +45,6 @@ describe("UserTable tests", () => {
       "explanation",
       "dateRequested",
       "dateNeeded",
-      "done",
     ];
     const testId = "RecommendationRequestTable";
 
@@ -68,6 +67,15 @@ describe("UserTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
       "3"
     );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-Done`)
+    ).toHaveTextContent("Yes");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-Done`)
+    ).toHaveTextContent("No");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-Done`)
+    ).toHaveTextContent("No");
 
     const editButton = screen.queryByTestId(
       `${testId}-cell-row-0-col-Edit-button`
@@ -110,7 +118,6 @@ describe("UserTable tests", () => {
       "explanation",
       "dateRequested",
       "dateNeeded",
-      "done",
     ];
 
     const testId = "RecommendationRequestTable";
@@ -134,6 +141,15 @@ describe("UserTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
       "3"
     );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-Done`)
+    ).toHaveTextContent("Yes");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-Done`)
+    ).toHaveTextContent("No");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-Done`)
+    ).toHaveTextContent("No");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`

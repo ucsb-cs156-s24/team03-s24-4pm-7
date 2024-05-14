@@ -41,7 +41,7 @@ export default function RecommendationRequestTable({ requests, currentUser }) {
     { Header: "Explanation", accessor: "explanation" },
     { Header: "Date Requested", accessor: "dateRequested" },
     { Header: "Date Needed", accessor: "dateNeeded" },
-    { Header: "Done", accessor: "done" },
+    { Header: "Done", accessor: (row) => (row.done ? "Yes" : "No") },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
