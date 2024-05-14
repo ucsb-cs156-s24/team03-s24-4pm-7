@@ -106,7 +106,6 @@ public class ArticlesController extends ApiController {
         articles.setUrl(incoming.getUrl());
         articles.setExplanation(incoming.getExplanation());
         articles.setEmail(incoming.getEmail());
-        System.out.println(incoming.getLocalDateTime());
         articles.setLocalDateTime(incoming.getLocalDateTime());
 
         articlesRepository.save(articles);
