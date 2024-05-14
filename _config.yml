@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/team03-s24-4pm-7
 owner: ucsb-cs156-s24
 repo_name: team03-s24-4pm-7
-pull_requests: [{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-edit2","number":104,"title":"adding all functionality for edit, passes tests and mutations","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/104"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-index","number":105,"title":"adding all functionality for articles index page","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/105"},{"author":{"id":"MDQ6VXNlcjg2OTg1OTQx","is_bot":false,"login":"mczimmermann","name":"Michelle Z"},"headRefName":"che-edit2","number":104,"title":"adding all functionality for edit, passes tests and mutations","url":"https://github.com/ucsb-cs156-s24/team03-s24-4pm-7/pull/104"}]
