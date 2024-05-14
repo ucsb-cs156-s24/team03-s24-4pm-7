@@ -1,4 +1,4 @@
-const recommendationRequestsFixtures = {
+const recommendationRequestFixtures = {
   oneRequest: {
     id: 1,
     requesterEmail: "student@ucsb.edu",
@@ -6,7 +6,7 @@ const recommendationRequestsFixtures = {
     explanation: "explanation",
     dateRequested: "2024-05-09T23:19:21.971Z",
     dateNeeded: "2024-05-09T23:19:21.971Z",
-    done:false,
+    done: false,
   },
   threeRequests: [
     {
@@ -25,7 +25,7 @@ const recommendationRequestsFixtures = {
       explanation: "explanation2",
       dateRequested: "2026-05-09T23:19:21.971Z",
       dateNeeded: "2026-05-09T23:19:21.971Z",
-      done:false,
+      done: false,
     },
     {
       id: 4,
@@ -39,4 +39,4 @@ const recommendationRequestsFixtures = {
   ],
 };
 
-export { recommendationRequestsFixtures };
+export { recommendationRequestFixtures };
