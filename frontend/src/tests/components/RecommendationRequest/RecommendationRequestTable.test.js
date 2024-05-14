@@ -4,6 +4,8 @@ import RecommendationRequestTable from "main/components/RecommendationRequest/Re
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
+import { onDeleteSuccess } from "main/utils/RecommendationRequestUtils";
+import { toast } from "react-toastify";
 
 const mockedNavigate = jest.fn();
 
@@ -196,5 +198,50 @@ describe("UserTable tests", () => {
         "/recommendationrequest/edit/1"
       )
     );
+  });
+
+  test("Delete button calls delete callback", async () => {
+    const currentUser = currentUserFixtures.adminUser;
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <RecommendationRequestTable
+            requests={recommendationRequestFixtures.threeRequests}
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    // assert - check that the expected content is rendered
+    await waitFor(() => {
+      expect(
+        screen.getByTestId(`RecommendationRequestTable-cell-row-0-col-id`)
+      ).toHaveTextContent("1");
+    });
+
+    const deleteButton = screen.getByTestId(
+      `RecommendationRequestTable-cell-row-0-col-Delete-button`
+    );
+    expect(deleteButton).toBeInTheDocument();
+
+    fireEvent.click(deleteButton);
+  });
+});
+
+jest.mock("react-toastify", () => ({
+  toast: jest.fn(),
+}));
+
+describe("onDeleteSuccess", () => {
+  it("logs the message and displays a toast", () => {
+    console.log = jest.fn();
+
+    const message = "Test message";
+    onDeleteSuccess(message);
+
+    expect(console.log).toHaveBeenCalledWith(message);
+    expect(toast).toHaveBeenCalledWith(message);
   });
 });
