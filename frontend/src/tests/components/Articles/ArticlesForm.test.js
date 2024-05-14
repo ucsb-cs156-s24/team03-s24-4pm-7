@@ -208,6 +208,30 @@ describe("ArticlesForm tests", () => {
 
     });
 
+    test("that the correct validations are performed", async () => {
+        render(
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <ArticlesForm />
+                </Router>
+            </QueryClientProvider>
+        );
+
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        const submitButton = screen.getByText(/Create/);
+        fireEvent.click(submitButton);
+        const mockSubmit = screen.getByTestId(`${testId}-submit`);
+        fireEvent.change(mockSubmit, { target: { value: "" } });
+
+        await screen.findByText(/Title is required/);
+        expect(screen.getByText(/Title is required/)).toBeInTheDocument();
+        expect(screen.getByText(/URL is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Email is required/)).toBeInTheDocument();
+        expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
+
+    });
+
 });
 
 
