@@ -94,7 +94,7 @@ function App() {
               <Route exact path="/ucsborganizations" element={<UCSBOrganizationIndexPage />} />
               <Route exact path="/ucsbdiningcommonsmenuitem" element={<UCSBDiningCommonsMenuItemIndexPage />} />
               <Route exact path="/helprequest" element={<HelpRequestIndexPage />} />
-
+              <Route exact path="/ucsborganizations" element={<UCSBOrganizationIndexPage />} />
             </>
           )
         }
