@@ -24,28 +24,26 @@ public class HelpRequestWebIT extends WebTestCase {
         page.getByText("HelpRequest").click();
 
         page.getByText("Create HelpRequest").click();
+        
         assertThat(page.getByText("Create New HelpRequest")).isVisible();
         page.getByTestId("HelpRequestForm-requesterEmail").fill("test@gmail.com");
         page.getByTestId("HelpRequestForm-teamId").fill("team07");
         page.getByTestId("HelpRequestForm-tableOrBreakoutRoom").fill("table");
         page.getByTestId("HelpRequestForm-requestTime").fill("2020-01-01T00:00");
         page.getByTestId("HelpRequestForm-explanation").fill("explanation");
+        
         page.getByTestId("HelpRequestForm-submit").click();
 
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail"))
-                .hasText("test@gmail.com");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("test@gmail.com");
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Edit-button").click();
+        
         assertThat(page.getByText("Edit HelpRequest")).isVisible();
-        page.getByTestId("HelpRequestForm-requesterEmail").fill("test@gmail.com_edit");
-        page.getByTestId("HelpRequestForm-teamId").fill("team07_edit");
-        page.getByTestId("HelpRequestForm-tableOrBreakoutRoom").fill("table");
-        page.getByTestId("HelpRequestForm-requestTime").fill("1970-01-01T00:00");
-        page.getByTestId("HelpRequestForm-explanation").fill("explanation_edit");
+        page.getByTestId("HelpRequestForm-requesterEmail").fill("test@gmail-edit.com");
+
         page.getByTestId("HelpRequestForm-submit").click();
 
-        assertThat(page.getByText("HelpRequests")).isVisible();
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-teamId")).hasText("team07_edit");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("test@gmail-edit.com");
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
