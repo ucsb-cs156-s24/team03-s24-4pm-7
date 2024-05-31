@@ -31,7 +31,7 @@ public class ArticlesWebIT extends WebTestCase {
         page.getByTestId("ArticlesForm-url").fill("nyt.com");
         page.getByTestId("ArticlesForm-explanation").fill("This is the New York Times' Homepage!");
         page.getByTestId("ArticlesForm-email").fill("n@nyt.com");
-        page.getByTestId("ArticlesForm-localDateTime").fill("2022-01-03T00:00:00");
+        page.getByTestId("ArticlesForm-localDateTime").fill("1970-01-01T00:00");
         page.getByTestId("ArticlesForm-submit").click();
 
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title"))
@@ -43,7 +43,7 @@ public class ArticlesWebIT extends WebTestCase {
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-email"))
                 .hasText("n@nyt.com");
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-localDateTime"))
-                .hasText("2022-01-03T00:00:00");
+                .hasText("1970-01-01T00:00:00");
 
         page.getByTestId("ArticlesTable-cell-row-0-col-Edit-button").click();
         assertThat(page.getByText("Edit Article")).isVisible();
@@ -51,7 +51,7 @@ public class ArticlesWebIT extends WebTestCase {
         page.getByTestId("ArticlesForm-url").fill("cnn.com");
         page.getByTestId("ArticlesForm-explanation").fill("This is CNN's Homepage!");
         page.getByTestId("ArticlesForm-email").fill("c@cnn.com");
-        page.getByTestId("ArticlesForm-localDateTime").fill("2022-04-03T00:00:00");
+        page.getByTestId("ArticlesForm-localDateTime").fill("2000-01-01T00:00");
         page.getByTestId("ArticlesForm-submit").click();
 
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title"))
@@ -63,7 +63,7 @@ public class ArticlesWebIT extends WebTestCase {
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-email"))
                 .hasText("c@cnn.com");
         assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-localDateTime"))
-                .hasText("2022-04-03T00:00:00");
+                .hasText("2000-01-01T00:00:00");
         
         page.getByTestId("ArticlesTable-cell-row-0-col-Delete-button").click();
 
