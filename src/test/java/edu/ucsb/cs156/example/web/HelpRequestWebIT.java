@@ -44,8 +44,8 @@ public class HelpRequestWebIT extends WebTestCase {
         page.getByTestId("HelpRequestForm-explanation").fill("explanation_edit");
         page.getByTestId("HelpRequestForm-submit").click();
 
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail"))
-                .hasText("test@gmail.com_edit");
+        assertThat(page.getByText("HelpRequests")).isVisible();
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-teamId")).hasText("team07_edit");
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
