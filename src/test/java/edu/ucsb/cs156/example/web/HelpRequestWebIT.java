@@ -35,15 +35,31 @@ public class HelpRequestWebIT extends WebTestCase {
         page.getByTestId("HelpRequestForm-submit").click();
 
         assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("test@gmail.com");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-teamId")).hasText("team07");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-tableOrBreakoutRoom")).hasText("table");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requestTime")).hasText("2020-01-01T00:00:00");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-explanation")).hasText("explanation");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-solved")).hasText("false");
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Edit-button").click();
         
         assertThat(page.getByText("Edit HelpRequest")).isVisible();
         page.getByTestId("HelpRequestForm-requesterEmail").fill("test@gmail-edit.com");
+        page.getByTestId("HelpRequestForm-teamId").fill("team07-edit");
+        page.getByTestId("HelpRequestForm-tableOrBreakoutRoom").fill("breakout");
+        page.getByTestId("HelpRequestForm-requestTime").fill("1970-01-01T00:00");
+        page.getByTestId("HelpRequestForm-explanation").fill("explanation-edit");
+        page.getByTestId("HelpRequestForm-solved").click();
 
         page.getByTestId("HelpRequestForm-submit").click();
 
         assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("test@gmail-edit.com");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-teamId")).hasText("team07-edit");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-tableOrBreakoutRoom")).hasText("breakout");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requestTime")).hasText("1970-01-01T00:00:00");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-explanation")).hasText("explanation-edit");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-solved")).hasText("true");
+
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
