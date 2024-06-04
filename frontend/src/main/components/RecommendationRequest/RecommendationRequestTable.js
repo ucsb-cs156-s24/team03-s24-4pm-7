@@ -5,11 +5,14 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/RecommendationRequestUtils";
+} from "main/utils/recommendationRequestUtils";
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function RecommendationRequestTable({ requests, currentUser }) {
+export default function RecommendationRequestTable({
+  recommendationRequests,
+  currentUser,
+}) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
@@ -25,23 +28,40 @@ export default function RecommendationRequestTable({ requests, currentUser }) {
   );
   // Stryker restore all
 
-  // Stryker disable all
+  // Stryker disable next-line all : TODO try to make a good test for this
   const deleteCallback = async (cell) => {
     deleteMutation.mutate(cell);
   };
-  // Stryker restore all
 
   const columns = [
     {
       Header: "id",
       accessor: "id", // accessor is the "key" in the data
     },
-    { Header: "Requester Email", accessor: "requesterEmail" },
-    { Header: "Professor Email", accessor: "professorEmail" },
-    { Header: "Explanation", accessor: "explanation" },
-    { Header: "Date Requested", accessor: "dateRequested" },
-    { Header: "Date Needed", accessor: "dateNeeded" },
-    { Header: "Done", accessor: (row) => (row.done ? "Yes" : "No") },
+    {
+      Header: "RequesterEmail",
+      accessor: "requesterEmail",
+    },
+    {
+      Header: "ProfessorEmail",
+      accessor: "professorEmail",
+    },
+    {
+      Header: "Explanation",
+      accessor: "explanation",
+    },
+    {
+      Header: "DateRequested",
+      accessor: "dateRequested",
+    },
+    {
+      Header: "DateNeeded",
+      accessor: "dateNeeded",
+    },
+    {
+      Header: "Done",
+      accessor: (row, _rowIndex) => String(row.done),
+    },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
@@ -53,7 +73,6 @@ export default function RecommendationRequestTable({ requests, currentUser }) {
         "RecommendationRequestTable"
       )
     );
-    // Inside the if (hasRole(currentUser, "ROLE_ADMIN")) block
     columns.push(
       ButtonColumn(
         "Delete",
@@ -66,7 +85,7 @@ export default function RecommendationRequestTable({ requests, currentUser }) {
 
   return (
     <OurTable
-      data={requests}
+      data={recommendationRequests}
       columns={columns}
       testid={"RecommendationRequestTable"}
     />

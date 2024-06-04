@@ -1,5 +1,5 @@
 const recommendationRequestFixtures = {
-  oneRequest: {
+  oneRecommendationRequest: {
     id: 1,
     requesterEmail: "student@ucsb.edu",
     professorEmail: "professor@ucsb.edu",
@@ -8,9 +8,9 @@ const recommendationRequestFixtures = {
     dateNeeded: "2024-05-09T23:19:21.971Z",
     done: false,
   },
-  threeRequests: [
+  threeRecommendationRequests: [
     {
-      id: 1,
+      id: 2,
       requesterEmail: "student1@ucsb.edu",
       professorEmail: "professor1@ucsb.edu",
       explanation: "explanation1",
@@ -19,7 +19,7 @@ const recommendationRequestFixtures = {
       done: true,
     },
     {
-      id: 2,
+      id: 3,
       requesterEmail: "student2@ucsb.edu",
       professorEmail: "professor2@ucsb.edu",
       explanation: "explanation2",
@@ -28,7 +28,7 @@ const recommendationRequestFixtures = {
       done: false,
     },
     {
-      id: 3,
+      id: 4,
       requesterEmail: "student3@ucsb.edu",
       professorEmail: "professor3@ucsb.edu",
       explanation: "explanation3",
