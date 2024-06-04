@@ -63,7 +63,7 @@ export default function ArticlesEditPage({storybook=false}) {
       <div className="pt-2">
         <h1>Edit Article</h1>
         {
-          article && <ArticlesForm initialContents={article} submitAction={onSubmit} buttonLabel="Update" />
+          article && <ArticlesForm submitAction={onSubmit} buttonLabel="Update" initialContents={article}/>
         }
       </div>
     </BasicLayout>
