@@ -118,7 +118,6 @@ function App() {
               <Route exact path="/ucsborganizations" element={<UCSBOrganizationIndexPage />} />
               <Route exact path="/ucsbdiningcommonsmenuitem" element={<UCSBDiningCommonsMenuItemIndexPage />} />
               <Route exact path="/helprequest" element={<HelpRequestIndexPage />} />
-              <Route exact path="/ucsborganizations" element={<UCSBOrganizationIndexPage />} />
               <Route exact path="/articles" element={<ArticlesIndexPage />} />
             </>
           )
@@ -134,7 +133,6 @@ function App() {
               <Route exact path="/helprequest/create" element={<HelpRequestCreatePage />} />
               <Route exact path="/articles/edit/:id" element={<ArticlesEditPage />} />
               <Route exact path="/articles/create" element={<ArticlesCreatePage />} />
-              <Route exact path="/articles/edit/:id" element={<ArticlesEditPage />} />
                 
             </>
           )

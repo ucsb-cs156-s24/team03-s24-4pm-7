@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import edu.ucsb.cs156.example.entities.Articles;
+import edu.ucsb.cs156.example.entities.UCSBDate;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.ArticlesRepository;
 
@@ -27,66 +28,63 @@ import javax.validation.Valid;
 
 import java.time.LocalDateTime;
 
-@Tag(name = "articles")
+@Tag(name = "Articles")
 @RequestMapping("/api/articles")
 @RestController
 @Slf4j
 public class ArticlesController extends ApiController {
+
     @Autowired
     ArticlesRepository articlesRepository;
 
     @Operation(summary= "List all articles")
-    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Iterable<Articles> allArticles() {
         Iterable<Articles> articles = articlesRepository.findAll();
         return articles;
     }
 
     @Operation(summary= "Create a new article")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
-    public Articles postArticle(
-            @Parameter(name="title") @RequestParam String title,
-            @Parameter(name="url") @RequestParam String url,
-            @Parameter(name="explanation") @RequestParam String explanation,
-            @Parameter(name="email") @RequestParam String email,
-            @Parameter(name="localDateTime") @RequestParam("localDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime)
+    public Articles postArticles(
+            @Parameter(name = "title") @RequestParam String title,
+            @Parameter(name = "url") @RequestParam String url,
+            @Parameter(name = "explanation") @RequestParam String explanation,
+            @Parameter(name = "email") @RequestParam String email,
+            @Parameter(name = "localDateTime") @RequestParam("localDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime)
             throws JsonProcessingException {
-
-        // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-        // See: https://www.baeldung.com/spring-date-parameters
 
         log.info("localDateTime={}", localDateTime);
 
-        Articles article = new Articles();
-        article.setTitle(title);
-        article.setUrl(url);
-        article.setExplanation(explanation);
-        article.setEmail(email);
-        article.setLocalDateTime(localDateTime);
+        Articles articles = new Articles();
+        articles.setTitle(title);
+        articles.setUrl(url);
+        articles.setExplanation(explanation);
+        articles.setEmail(email);
+        articles.setLocalDateTime(localDateTime);
 
-        Articles savedArticle = articlesRepository.save(article);
+        Articles savedArticles = articlesRepository.save(articles);
 
-        return savedArticle;
+        return savedArticles;
     }
 
-    @Operation(summary= "Get a single article")
+    @Operation(summary = "Get a single article")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public Articles getById(
-            @Parameter(name="id") @RequestParam Long id) {
-        Articles article = articlesRepository.findById(id)
+            @Parameter(name = "id") @RequestParam Long id) {
+        Articles articles = articlesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
-        return article;
+        return articles;
     }
 
-    @Operation(summary= "Delete an Article")
+    @Operation(summary = "Delete an article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteArticle(
-            @Parameter(name="id") @RequestParam Long id) {
+            @Parameter(name = "id") @RequestParam Long id) {
         Articles article = articlesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
@@ -94,25 +92,24 @@ public class ArticlesController extends ApiController {
         return genericMessage("Article with id %s deleted".formatted(id));
     }
 
-    @Operation(summary= "Update a single article")
+    @Operation(summary = "Update a single article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public Articles updateUCSBDate(
-            @Parameter(name="id") @RequestParam Long id,
+    public Articles updateArticle(
+            @Parameter(name = "id") @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
-        Articles article = articlesRepository.findById(id)
+        Articles articles = articlesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
-        article.setId(incoming.getId());
-        article.setTitle(incoming.getTitle());
-        article.setUrl(incoming.getUrl());
-        article.setEmail(incoming.getEmail());
-        article.setExplanation(incoming.getExplanation());
-        article.setLocalDateTime(incoming.getLocalDateTime());
+        articles.setTitle(incoming.getTitle());
+        articles.setUrl(incoming.getUrl());
+        articles.setExplanation(incoming.getExplanation());
+        articles.setEmail(incoming.getEmail());
+        articles.setLocalDateTime(incoming.getLocalDateTime());
 
-        articlesRepository.save(article);
+        articlesRepository.save(articles);
 
-        return article;
+        return articles;
     }
 }
