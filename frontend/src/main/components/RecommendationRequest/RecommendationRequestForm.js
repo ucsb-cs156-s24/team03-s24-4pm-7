@@ -28,6 +28,9 @@ function RecommendationRequestForm({
   // Stryker disable next-line all
   const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 
+  // Stryker disable next-line all
+  const done_regex = /^(true|false)$/i;
+
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       <Row>
@@ -57,10 +60,13 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.requesterEmail)}
               {...register("requesterEmail", {
                 required: true,
+                pattern: email_regex,
               })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.requesterEmail && "RequesterEmail is required. "}
+              {errors.requesterEmail?.type === "pattern" &&
+               "RequesterEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -160,10 +166,11 @@ function RecommendationRequestForm({
               id="done"
               type="boolean"
               isInvalid={Boolean(errors.done)}
-              {...register("done", { required: true })}
+              {...register("done", { required: true, pattern: done_regex})}
             />
             <Form.Control.Feedback type="invalid">
               {errors.done && "Done is required. "}
+              {errors.done?.type === "pattern" && "Done must be true or false."}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
