@@ -58,6 +58,7 @@ describe("RecommendationRequestForm tests", () => {
     const dateNeededField = screen.getByTestId(
       "RecommendationRequestForm-dateNeeded"
     );
+    const doneField = screen.getByTestId("RecommendationRequestForm-done");
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
     fireEvent.change(requesterEmailField, { target: { value: "bad-input" } });
@@ -65,7 +66,17 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(explanationField, { target: { value: "bad-input" } });
     fireEvent.change(dateRequestedField, { target: { value: "bad-input" } });
     fireEvent.change(dateNeededField, { target: { value: "bad-input" } });
+    fireEvent.change(doneField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
+
+    await screen.findByText(
+      /RequesterEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
+    );
+    expect(
+      screen.getByText(
+        /RequesterEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
+      )
+    ).toBeInTheDocument();
 
     await screen.findByText(
       /ProfessorEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
@@ -75,6 +86,9 @@ describe("RecommendationRequestForm tests", () => {
         /ProfessorEmail must be in the format EMAIL, e.g. cgaucho@ucsb.edu/
       )
     ).toBeInTheDocument();
+
+    await screen.findByText(/Done must be true or false./);
+    expect(screen.getByText(/Done must be true or false./)).toBeInTheDocument();
   });
 
   test("Correct Error messsages on missing input", async () => {
@@ -120,7 +134,7 @@ describe("RecommendationRequestForm tests", () => {
     const dateNeededField = screen.getByTestId(
       "RecommendationRequestForm-dateNeeded"
     );
-    const doneCheckbox = screen.getByTestId("RecommendationRequestForm-done");
+    const doneField = screen.getByTestId("RecommendationRequestForm-done");
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
     fireEvent.change(requesterEmailField, {
@@ -139,7 +153,9 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(dateNeededField, {
       target: { value: "2022-01-02T12:00" },
     });
-    fireEvent.click(doneCheckbox);
+    fireEvent.change(doneField, {
+      target: { value: "true" },
+    });
     fireEvent.click(submitButton);
     expect(
       screen.queryByText(
@@ -157,6 +173,7 @@ describe("RecommendationRequestForm tests", () => {
     expect(
       screen.queryByText(/DateNeeded must be in ISO format/)
     ).not.toBeInTheDocument();
+    expect(screen.queryByText(/Done must be true or false./)).not.toBeInTheDocument();
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
